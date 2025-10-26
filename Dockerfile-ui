@@ -8,7 +8,7 @@ RUN pip3 install --upgrade pip
 COPY ./requirements.txt .
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-ADD src $PROJECT_PATH
+ADD ui $PROJECT_PATH
 
 EXPOSE 8501
 
