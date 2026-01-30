@@ -1,5 +1,6 @@
-import ollama
 import streamlit as st
+
+from llm_client import LLMClient
 
 
 def main():
@@ -17,10 +18,9 @@ def main():
         with st.chat_message('user'):
             st.markdown(prompt)
         with st.chat_message('assistant'):
-            client = ollama.Client(host='host.docker.internal:11434')
+            client = LLMClient()
             with st.spinner('Consulting ollama...'):
-                # response = client.generate(model='gemma3:1b', prompt=prompt)['response']
-                response = client.chat(model='gemma3:1b', messages=st.session_state.messages)['message']['content']
+                response = client.ask(st.session_state.messages)
                 st.markdown(response)
                 st.session_state.messages.append({'role': 'assistant', 'content': response})
 
